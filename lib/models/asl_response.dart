@@ -6,7 +6,7 @@ class AslResponse {
 
   factory AslResponse.fromJson(Map<String, dynamic> json) {
     return AslResponse(
-      description: json['description'] ?? 'Error: No sentence found',
+      description: json['text'] ?? 'Error: No sentence found',
       aslGloss: json['asl_gloss'] ?? 'Error: No gloss found',
     );
   }

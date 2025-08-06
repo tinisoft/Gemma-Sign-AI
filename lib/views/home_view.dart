@@ -133,7 +133,15 @@ class _InterpreterScreenState extends State<InterpreterScreen> {
   }
 
   Future<void> _playGlossAnimationSequence(String gloss) async {
-    final words = gloss.toUpperCase().split(' ');
+    final sanitizedGloss = gloss.toUpperCase().replaceAll(
+      RegExp(r'[^A-Z0-9\s]'),
+      '',
+    );
+
+    final words = sanitizedGloss
+        .split(RegExp(r'\s+'))
+        .where((s) => s.isNotEmpty)
+        .toList();
 
     for (final word in words) {
       if (!mounted) return;
@@ -150,11 +158,30 @@ class _InterpreterScreenState extends State<InterpreterScreen> {
         );
         await _animationKey.currentState?.playAnimation(frames);
       } else {
-        print("Word '$word' not found in database. Skipping.");
-        setState(() {
-          _currentAnimatingWord = "$word (Not Found)";
-        });
-        await Future.delayed(const Duration(seconds: 1));
+        debugPrint("Word '$word' not found. Attempting to fingerspell.");
+
+        final characters = word.split('');
+
+        for (final char in characters) {
+          if (!mounted) return;
+
+          setState(() {
+            _currentAnimatingWord = "$word ($char)";
+          });
+
+          final letterJsons = await _fetchSignData(char);
+
+          if (letterJsons != null) {
+            final frames = _parseFrameData(
+              json.decode(letterJsons['pose_json']!),
+              json.decode(letterJsons['hand_json']!),
+            );
+            await _animationKey.currentState?.playAnimation(frames);
+          } else {
+            debugPrint("Character '$char' not found in alphabets. Skipping.");
+            await Future.delayed(const Duration(milliseconds: 300));
+          }
+        }
       }
     }
 

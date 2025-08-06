@@ -6,13 +6,14 @@ import 'package:gemma_sign_ai/models/asl_response.dart';
 import 'package:http/http.dart' as http;
 
 class AiModelService {
-  static const bool _useMockApi = true;
+  static const bool _useMockApi = false;
 
   String baseUrl = dotenv.env['BASE_URL'] ?? "";
 
   String get _apiUrl => "$baseUrl/transcribe";
 
-  final String _apiPrompt = "Transcribe this audio";
+  final String _apiPrompt =
+      "Please transcribe this audio and concat with it's ASL gloss with <ASL> </ASL> tag";
 
   final List<Map<String, String>> _mockResponses = [
     {
