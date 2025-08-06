@@ -34,15 +34,15 @@ This project is built with a focus on creating a practical, high-performance, an
 
 ## 🛠️ Technology Stack
 
-| Component         | Technology                                                                                                  | Purpose                                       |
-| ----------------- | ----------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
-| **Mobile App**    | ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white) Dart | Cross-platform application framework          |
-| **AI Model**      | ![Google](https://img.shields.io/badge/Google%20Gemma-4285F4?style=for-the-badge&logo=google&logoColor=white) | Speech-to-Text & ASL Gloss Translation        |
-| **Backend**       | ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) / Flask | Local server to host the Gemma model endpoint |
-| **Voice Capture** | `vad` Flutter Package                                                                                       | Voice Activity Detection                      |
-| **Database**      | ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)         | On-device storage for all sign data           |
-| **Compression**   | `Gzip`                                                                                                      | Reducing database size                        |
-| **Animation**     | `CustomPainter` API                                                                                         | High-performance, frame-by-frame rendering    |
+| Component         | Technology                                                                                                                                                            | Purpose                                       |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| **Mobile App**    | [![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev) [Dart](https://dart.dev)                 | Cross-platform application framework          |
+| **AI Model**      | [![Google Gemma](https://img.shields.io/badge/Google%20Gemma-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/gemma)                      | Speech-to-Text & ASL Gloss Translation        |
+| **Backend**       | [![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org) / [Flask](https://flask.palletsprojects.com/) | Local server to host the Gemma model endpoint |
+| **Voice Capture** | [`vad` Flutter Package](https://pub.dev/packages/vad)                                                                                                                 | Voice Activity Detection                      |
+| **Database**      | [![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/index.html)                              | On-device storage for all sign data           |
+| **Compression**   | [`Gzip`](https://en.wikipedia.org/wiki/Gzip)                                                                                                                          | Reducing database size                        |
+| **Animation**     | [`CustomPainter` API](https://api.flutter.dev/flutter/rendering/CustomPainter-class.html)                                                                             | High-performance, frame-by-frame rendering    |
 
 ---
 
@@ -154,13 +154,24 @@ The app needs to load all the JSON animation data into a local SQLite database. 
 
 
 ---
-
 ## 🗺️ Future Roadmap
 
-*   [ ] **Expand Vocabulary:** Integrate and seed an even larger dataset of words and phrases.
-*   [ ] **Add Facial Expressions:** Extend the data format to include facial landmarks for more expressive and nuanced signing.
-*   [ ] **Playback Controls:** Allow users to slow down, pause, or loop the animation for learning purposes.
-*   [ ] **Explore Rive:** Investigate migrating the `CustomPainter` engine to the high-performance [Rive](https://rive.app/) animation runtime for even smoother visuals and easier animation management.
-*   [ ] **Model Optimization:** Fine-tune the local Gemma model for lower latency and improved translation accuracy.
+This project has a strong foundation, but the vision for it is much larger. The following roadmap outlines key areas for future development, focusing on technological enhancement and expanding the application's capabilities.
+
+### Core Technology & Integration
+
+*   [ ] **Transition to Native On-Device Inference:** The app currently uses a local Python/Flask server to host the Gemma model. This is a temporary architecture chosen because direct Gemma support in the MediaPipe GenAI Task library for Flutter is still under active development (as evidenced by ongoing work like commit [`d148cf9`](https://github.com/google-ai-edge/mediapipe/commit/d148cf9bcc1feeb8494be7a73e1d7539f0b729a0)). A primary goal is to migrate to a fully native, on-device solution once the necessary APIs are released. This will eliminate the need for a separate server, vastly simplify user setup, and create a truly self-contained, offline-first application.
+*   [ ] **Model Optimization:** Continuously fine-tune and explore quantized versions of the local Gemma model to achieve lower latency and improved translation accuracy on a wider range of mobile devices.
+
+### Feature Enhancements
+
+*   [ ] **Incorporate Facial Expressions & Body Language:** ASL is more than just hands. The data pipeline will be extended to include facial landmarks (eyebrows, mouth, gaze) to animate more expressive and grammatically accurate signs.
+*   [ ] **Enhance Learning with Playback Controls:** Introduce controls to allow users to pause, loop, and adjust the playback speed of animations. This transforms the tool from a real-time interpreter into a valuable learning aid.
+*   [ ] **Expand the Lexicon:** Continuously expand the local database with thousands of additional words and common phrases to increase the interpreter's practical vocabulary.
+
+### Future Vision & New Capabilities
+
+*   [ ] **Implement Two-Way Communication: Sign-to-Speech:** The ultimate vision for this project is to become a complete two-way communication tool. The next major phase will involve using the device's camera to recognize and interpret sign language gestures in real-time, converting them back into spoken audio and text.
+*   [ ] **Migrate to a Dedicated Animation Runtime (Rive):** To further enhance performance and visual fidelity, investigate migrating the `CustomPainter` engine to a stateful animation runtime like [Rive](https://rive.app/). This would allow for even smoother animations and more complex character interactions.
 
 ---
