@@ -9,7 +9,7 @@ A real-time, on-device Speech-to-ASL interpreter that visualizes American Sign L
 
 ## 🎥 Live Demo
 
-![App Demo GIF](https://your-link-to-the-demo-gif.com/demo.gif)
+![App Demo GIF](assets/gif/demo.gif)
 *Real-time interpretation of spoken language into an animated ASL stick avatar.*
 
 ---
