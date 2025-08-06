@@ -154,8 +154,40 @@ The app needs to load all the JSON animation data into a local SQLite database. 
     *   **Watch the debug console.** You will see progress messages as the app seeds the alphabets, numbers, and words. This will take a few minutes to complete. Please wait until you see the final "seeding complete" message.
     *   Once seeding is complete, Press the mic to listen.
 
+I can help with that. Here's a rewritten version of your text.
 
----
+***
+
+## How We Prepared and Fine-Tuned the Model
+
+We took a two-pronged approach to preparing our datasets before fine-tuning the model. First, we focused on American Sign Language (ASL), and then on Automatic Speech Recognition (ASR).
+
+### 1. Preparing the Sign Language Dataset 🤟
+
+We utilized the **MediaPipe** framework to extract hand poses and finger movements from the WLASL (World Level American Sign Language) dataset.  The extracted data was then organized into a structured JSON format. We sourced this dataset from Kaggle:
+`https://www.kaggle.com/datasets/risangbaskoro/wlasl-processed`
+
+***
+
+### 2. Preparing the ASR Dataset with ASL Gloss 🗣️
+
+To create a transcription dataset, we used the LibriSpeech ASR dataset. We added **few-shot examples** and specific rules to a prompt to generate ASL Gloss equivalents for the audio. This process synthesized the necessary data for our model.
+
+The code for this process can be found here: `scripts/synth_asl_gloss_asr_dataset.py`
+
+***
+
+### 3. Fine-Tuning the Model 💻
+
+After preparing both the sign language and ASR datasets, we fine-tuned our model. We used the **Unsloth** library to perform this fine-tuning on the datasets we created.
+
+The fine-tuning script is located at: `scripts/gemma-3n-4b-audio-finetuning.py`
+
+### 4. To run API server
+Use the following script to run the Gemma3 model,
+`scripts/`
+
+
 ## 🗺️ Future Roadmap
 
 This project has a strong foundation, but the vision for it is much larger. The following roadmap outlines key areas for future development, focusing on technological enhancement and expanding the application's capabilities.
