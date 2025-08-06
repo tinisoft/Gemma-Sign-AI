@@ -18,6 +18,8 @@ A real-time, on-device Speech-to-ASL interpreter that visualizes American Sign L
 
 **Gemma-Sign-AI** is a Flutter-based mobile application designed to serve as a real-time interpreter, converting spoken language into animated American Sign Language (ASL). 
 
+![Project Architecture Diagram](assets/images/architecture_diagram.png)
+
 
 This project is built with a focus on creating a practical, high-performance, and socially beneficial application of local, on-device AI.
 
